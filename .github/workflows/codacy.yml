@@ -10,7 +10,11 @@ on:
 
 jobs:
   codacy:
+    name: Codacy CI (Python ${{ matrix.python-version }})
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ['3.13', '3.14']
     services:
       mariadb:
         image: mariadb:12.0.2
@@ -31,10 +35,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v5
 
-    - name: Set up Python
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v6
       with:
-        python-version: '3.13'
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
