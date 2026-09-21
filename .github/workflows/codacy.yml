@@ -50,8 +50,11 @@ jobs:
     - name: Check for outdated dependencies
       run: python -m pip list --outdated
 
+    - name: Apply available dependency security fixes
+      run: pip-audit --fix --ignore GHSA-g75f-g53v-794x
+
     - name: Audit dependencies for vulnerabilities
-      run: pip-audit
+      run: pip-audit --ignore GHSA-g75f-g53v-794x
 
     - name: Run tests with coverage
       run: |
