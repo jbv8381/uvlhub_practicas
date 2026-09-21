@@ -45,9 +45,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -e ./rosemary
+        python -m pip install pip-audit
 
     - name: Check for outdated dependencies
       run: python -m pip list --outdated
+
+    - name: Audit dependencies for vulnerabilities
+      run: pip-audit
 
     - name: Run tests with coverage
       run: |
